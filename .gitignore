@@ -1,0 +1,4 @@
+a.out
+libft/*.o
+libft/*.a
+exec.sh
