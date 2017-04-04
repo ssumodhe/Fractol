@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_fract.c                                     :+:      :+:    :+:   */
+/*   mandelbrot_fract.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/03 15:14:49 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/04 16:49:06 by ssumodhe         ###   ########.fr       */
+/*   Created: 2017/04/04 16:32:50 by ssumodhe          #+#    #+#             */
+/*   Updated: 2017/04/04 16:49:02 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
 	
 void		ft_pixel_put_img(t_image *img, int x, int y, int colour)
 {
@@ -137,7 +136,7 @@ void	ft_drawfractal(t_image *image, t_point point)
 
 }
 
-void	create_window(void)
+void	ft_mandelbrot(void)
 {
 	t_fractol	fractol;
 	t_image		*image;

@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:16 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/03 20:47:42 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/04 16:30:54 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 int		main(int argc, char **argv)
 {
-	int		fd;
+	int		i;
+	int		check;
 
-	if (argc != 2)
+	if (argc != 4 && argc != 3 && argc != 2)
 	{
-		ft_putstr("usage: ./fractol source_file\n");
+		ft_putendl("usage: ./fractol [mandelbrot | julia | kitty]");
 		return (0);
 	}
-	ft_checkfile(argv[1]);
-	if ((fd = open(argv[1], O_RDWR)) < 0)
+	i = 1;
+	while (i < argc)
 	{
-		ft_putstr(RED"open: fail\n"RESET"Try another source file\n");
-		return (0);
+		check = check + checkfile(argv[i]);
+		i++;
 	}
-	ft_prog(fd);
-	if (close(fd) < 0)
+	if (pick_fract(check) == 1)
 	{
-		ft_putstr(RED"close: fail\n"RESET);
+		ft_putendl("usage: ./fractol [mandelbrot | julia | kitty]");
 		return (0);
 	}
 	return (0);
