@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:16 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/04 16:30:54 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/05 16:09:54 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int		main(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
+		if (checkfile(argv[i]) == 8)
+		{
+			ft_putstr(argv[i]);
+			ft_putendl(" is invalid.");
+		}
 		check = check + checkfile(argv[i]);
 		i++;
 	}

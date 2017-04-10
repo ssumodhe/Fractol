@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:06:15 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/04 16:49:03 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/05 16:09:57 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 int		pick_fract(int check)
 {
-	if (check == 1 || check == 3 || check == 5 || check == 7)
+	if (check == 1 || check == 3 || check == 5 || check == 7 || check == 9 ||\
+			check == 11 || check == 13)
 	{
 		printf("to do : julia\n");
 	//	ft_julia();
 	}
-	if (check == 2 || check == 3 || check == 6 || check == 7)
+	if (check == 2 || check == 3 || check == 6 || check == 7 || check == 10 ||\
+			check == 11 || check == 14)
 	{
 		printf("to do : mandelbrot\n");
 		ft_mandelbrot();
 	}
-	if (check == 4 || check == 5 || check == 6 || check == 7)
+	if (check == 4 || check == 5 || check == 6 || check == 7 || check == 12 ||\
+			check == 13 || check == 14)
 	{
 		printf("to do : kitty\n");
 	//	ft_kitty();

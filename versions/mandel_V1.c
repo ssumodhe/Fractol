@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:32:50 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/10 20:10:13 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/10 17:14:31 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,10 +159,10 @@ void	get_point(t_image *image, t_point point)
 
 	x = 0;
 	y = 0;
-	zoom_x = 1;
-	zoom_y = 1;
-//	zoom_x = image->img_w / (point.x2 - point.x1);
-//	zoom_y = image->img_h / (point.y2 - point.y1);
+//	zoom_x = -0.5;
+//	zoom_y = 1;
+	zoom_x = image->img_w / (point.x2 - point.x1);
+	zoom_y = image->img_h / (point.y2 - point.y1);
 	point.y = 0;
 	while (point.y < image->img_h)
 	{
@@ -181,29 +181,7 @@ void	get_point(t_image *image, t_point point)
 				zre = tmp;
 				i--;
 			}
-			if (zre * zre + zim * zim >= 4 && zre * zre + zim * zim < 15)
-			{
-				i = 0x00FFFFFF;
-				//printf("%f\n", zre * zre + zim * zim);
-				ft_pixel_put_img(image, point.x, point.y, i);
-			}
-			if (zre * zre + zim * zim >= 15 && zre * zre + zim * zim < 20)
-			{
-				i = 0x00FF0000;
-				//printf("%f\n", zre * zre + zim * zim);
-				ft_pixel_put_img(image, point.x, point.y, i);
-			}
-			if (zre * zre + zim * zim >= 20 && zre * zre + zim * zim < 25)
-			{
-				i = 0x0000868B;
-				//printf("%f\n", zre * zre + zim * zim);
-				ft_pixel_put_img(image, point.x, point.y, i);
-			}
-			if (zre * zre + zim * zim >= 32)
-				printf("%f\n", zre * zre + zim * zim);
-
-			else
-				ft_pixel_put_img(image, point.x, point.y, i);
+			ft_pixel_put_img(image, point.x, point.y, point.colour);
 			point.x++;
 		}
 		point.y++;
