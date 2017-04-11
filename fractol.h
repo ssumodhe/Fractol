@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:53 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/10 20:13:03 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/11 18:34:17 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 # include "libft/libft.h"
 # include <mlx.h>
+# include <math.h>
 
 # define WIN_NAME "Smile!!"
-# define ITER_MAX 500
+# define ITER_MAX 50
 
 typedef	struct		s_fractol
 {

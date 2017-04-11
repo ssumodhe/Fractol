@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:32:50 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/11 18:34:09 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:53:01 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,63 @@ void		ft_drawline_img(t_image *image, t_point pc)
 	else
 		ft_choose_side_y(pc, image);
 }
+/*
+void		get_point(t_image *image, t_point point, float zoom_x, float zoom_y)
+{
+	int		i;
+	float	tmp;
+	float	z_im;
+	float	z_re;
+	float	c_im;
+	float	c_re;
+	double	zoom;
 
-void		get_colour(int colour, t_image *img, t_point point)
+	zoom = 1;
+	i = 0;
+	z_im = 0;
+	z_re = 0;
+//	c_im = point.y / (zoom_y + point.y1);
+//	c_re = point.x / (zoom_x + point.x1);
+	c_im = ((point.y - image->img_h) / 2) / ((0.5 * zoom * image->img_h) + zoom_y);
+	c_re = 1.5 * ((point.x - image->img_w) / 2) / ((0.5 * zoom * image->img_w) + zoom_x);
+
+	while (((z_re*z_re) + (z_im*z_im) < 4) && i < ITER_MAX)
+	{
+		tmp = z_re;
+		z_re = (z_re*z_re) - (z_im*z_im) + c_re;
+		z_im = (2*z_im*tmp) + c_im;
+		i++;
+	}
+	if (i == ITER_MAX)
+		ft_pixel_put_img(image, point.x, point.y, point.colour);
+}
+
+void	ft_drawfractal(t_image *image, t_point point)
+{
+	float		zoom_x;
+	float		zoom_y;
+
+//	zoom_x = image->img_w / (point.x2 - point.x1);
+//	zoom_y = image->img_h / (point.y2 - point.y1);
+	zoom_x = -0.5;
+	zoom_y = 0;
+
+	point.x = 0;
+	while (point.x < image->img_w)
+	{
+		point.y = 0;
+		while (point.y < image->img_h)
+		{
+			get_point(image, point, zoom_x, zoom_y);
+			point.y++;
+		}
+		point.x++;
+	}
+
+}
+*/
+
+int		get_colour(int i)
 {
 	double		c;
 	double		l;
@@ -97,72 +152,32 @@ void		get_colour(int colour, t_image *img, t_point point)
 	double		h;
 	double		m;
 	double		radian;
-	int			red;
-	int			blue;
-	int			green;
-	int			i;
 
-	h = (colour * 360) / ITER_MAX;
+	h = 150;
 	l = 0.5;
 	s = 1;
-
-	c = (1 - fabs((2*l) - 1)) * s;
+	c = (1 - ((2*l) - 1)) * s;
 	radian = 60 * M_PI / 180;
-	x = c * (1 - fabs(((h / cos(radian)) / 2) - 1));
+	x = c * (1 - (((h / cos(radian)) % 2) - 1));
 	m = l - (c / 2);
 	if (h >= 0 && h < 60)
 	{
-		red = c;
-		green = x;
-		blue = 0;
 	}
 	if (h >= 60 && h < 120)
 	{
-		red = x;
-		green = c;
-		blue = 0;
 	}
 	if (h >= 120 && h < 180)
 	{
-		red = 0;
-		green = c;
-		blue = x;
 	}
 	if (h >= 180 && h < 240)
 	{
-		red = 0;
-		green = x;
-		blue = c;
 	}
 	if (h >= 240 && h < 300)
 	{
-		red = x;
-		green = 0;
-		blue = c;
 	}
 	if (h >= 300 && h < 360)
 	{
-		red = c;
-		green = 0;
-		blue = x;
 	}
-
-	red = (red + m) * 255;
-	green = (green + m) * 255;
-	blue = (blue + m) * 255;
-
-	if (point.x >= 0 && point.y >= 0 && point.x < img->img_w)
-	{
-		i = (4 * (point.x + (point.y * img->img_w)));
-		if (i < (4 * img->img_w * img->img_h) - 4)
-		{
-			img->img_addr[i + 0] = blue;
-			img->img_addr[i + 1] = green;
-			img->img_addr[i + 2] = red;
-			img->img_addr[i + 3] = 0x00;
-		}
-	}
-
 }
 
 void	get_point(t_image *image, t_point point)
@@ -203,10 +218,28 @@ void	get_point(t_image *image, t_point point)
 				i--;
 			}
 
-			if (zre * zre + zim * zim >= 4)
+			i = get_colour(i);
+			if (zre * zre + zim * zim >= 4 && zre * zre + zim * zim < 15)
 			{
-				get_colour(i, image, point);
+				i = 0x00FFFFFF;
+				//printf("%f\n", zre * zre + zim * zim);
+				ft_pixel_put_img(image, point.x, point.y, i);
 			}
+			if (zre * zre + zim * zim >= 15 && zre * zre + zim * zim < 20)
+			{
+				i = 0x00FF0000;
+				//printf("%f\n", zre * zre + zim * zim);
+				ft_pixel_put_img(image, point.x, point.y, i);
+			}
+			if (zre * zre + zim * zim >= 20 && zre * zre + zim * zim < 25)
+			{
+				i = 0x0000868B;
+				//printf("%f\n", zre * zre + zim * zim);
+				ft_pixel_put_img(image, point.x, point.y, i);
+			}
+			if (zre * zre + zim * zim >= 32)
+				printf("%f\n", zre * zre + zim * zim);
+
 			else
 				ft_pixel_put_img(image, point.x, point.y, i);
 			point.x++;
