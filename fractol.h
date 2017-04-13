@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:53 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/12 20:35:40 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/13 18:10:35 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef	struct		s_fractol
 
 typedef	struct		s_image
 {
+	void	*image;
 	float		img_w;
 	float		img_h;
 	char	*img_addr;
@@ -62,7 +63,7 @@ typedef	struct		s_point
 ** parsing_fract.c
 */
 int					checkfile(char *str);
-int					pick_fract(int check);
+void					pick_fract(int check);
 
 /*
 ** display_fract.c

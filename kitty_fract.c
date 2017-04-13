@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 15:52:59 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/12 20:35:32 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/12 21:33:44 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	draw_circle(t_image *image, t_point point, t_circle circle)
 
 void	get_point_kitty(t_image *image, t_point point)
 {
-	t_circle circle;
+	t_circle 	circle;
 	int			i;
 
 	point.colour = 0x0099FF;
