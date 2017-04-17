@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:16 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/13 19:12:02 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/15 23:02:51 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,38 @@ int		checkfile(char *str)
 	if (ft_strcmp("julia", str) == 0)
 		num = 1;
 	else if (ft_strcmp("mandelbrot", str) == 0)
-		num = 2;
-	else if (ft_strcmp("kitty", str) == 0)
 		num = 4;
+	else if (ft_strcmp("kitty", str) == 0)
+		num = 13;
 	else
-		num = 8;
+		num = 40;
 	return (num);
 }
 
 int		main(int argc, char **argv)
 {
 	int		i;
+	int		cpt;
 	int		check;
 
 	if (argc != 4 && argc != 3 && argc != 2)
 		ft_exit("usage: ./fractol [mandelbrot | julia | kitty]");
 	i = 1;
+	cpt = 0;
 	while (i < argc)
 	{
-		if (checkfile(argv[i]) == 8)
+		if (checkfile(argv[i]) == 40)
 		{
 			ft_putstr(argv[i]);
 			ft_putendl(" is invalid.");
+			cpt++;
 		}
 		check = check + checkfile(argv[i]);
 		i++;
 	}
-	if (check <= 14 && check != 8)
+	if (cpt >= 1)
+		ft_putendl("usage: ./fractol [mandelbrot | julia | kitty]");
+	if (check <= 93 && check != 40 && check != 80)
 		pick_fract(check);
 	return (0);
 }

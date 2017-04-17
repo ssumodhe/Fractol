@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:53 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/13 18:10:35 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/17 17:44:06 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,8 @@
 # define WIN_NAME "Smile!!"
 # define ITER_MAX_MAN 142
 # define ITER_MAX_JU 200
-# define ITER_MAX_KITZ 10
+# define ITER_MAX_KITZ 25 //unused
 
-typedef struct		s_circle
-{
-	int		r;
-}					t_circle;
 
 typedef	struct		s_fractol
 {
@@ -35,14 +31,6 @@ typedef	struct		s_fractol
 	void	*win_3;
 	void	*image;
 }					t_fractol;
-
-typedef	struct		s_image
-{
-	void	*image;
-	float		img_w;
-	float		img_h;
-	char	*img_addr;
-}					t_image;
 
 typedef	struct		s_point
 {
@@ -59,11 +47,47 @@ typedef	struct		s_point
 	float		yinc;
 }					t_point;
 
+typedef	struct		s_image
+{
+	void		*image;
+	float		img_w;
+	float		img_h;
+	char		*img_addr;
+	t_fractol	f;
+	t_point		pc;
+}					t_image;
+
+typedef struct		s_circle
+{
+	double		x_orig;
+	double		y_orig;
+	int			r;
+	int			i;
+	int			colour;
+	t_image		*image;
+}					t_circle;
+
+
+typedef struct		s_calc
+{
+	double		cre;
+	double		cim;
+}					t_calc;
+
+
 /*
-** parsing_fract.c
+** main_fract.c
 */
 int					checkfile(char *str);
-void					pick_fract(int check);
+
+/*
+** pick_fract.c
+*/
+void				pick_fract(int check);
+void				ft_julia(t_fractol f, t_point pc);
+void				ft_mandelbrot(t_fractol f, t_point pc);
+void				ft_kitty(t_fractol f, t_point pc);
+
 
 /*
 ** display_fract.c
@@ -83,19 +107,19 @@ void				put_frame(t_image *image, t_point point);
 ** mandelbrot_fract.c
 */
 
-void				ft_mandelbrot(void);
 void				get_point_mandelbrot(t_image *image, t_point point);
+int					ft_mandelbrot_key(int keycode, t_image *image);
 
 /*
 ** julia_fract.c
 */
-void				ft_julia(void);
-void				get_point_julia(t_image *image, t_point point);
+void				get_point_julia(t_image *image, t_point point, t_calc ca);
+int					ft_julia_key(int keycode, t_image *image);
 
 /*
 ** kitty_fract.c
 */
-void				ft_kitty(void);
 void				get_point_kitty(t_image *image, t_point point);
+int					ft_kitty_key(int keycode, t_image *image);
 
 #endif
