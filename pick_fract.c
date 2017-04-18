@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/15 22:43:12 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/17 17:44:03 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/18 18:27:40 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,13 @@ void	ft_mandelbrot(t_fractol f, t_point pc)
 	mlx_put_image_to_window(f.mlx, f.win_2, img_2->image, 10, 10);
 }
 
-void	ft_julia(t_fractol f, t_point pc)
+void	ft_julia(t_fractol f, t_point pc, t_calc cal)
 {
 	t_image	*img_1;
-	t_calc	cal;
 	int		end = 1;
 	int		s_l = 4;
 	int		bpp = 32;
 
-	f.win_1 = mlx_new_window(f.mlx, 1500, 1020, "Julia's window");
 	if (!(img_1 = (t_image *)malloc(sizeof(*img_1))))
 		ft_exit("error malloc for julia");
 	img_1->img_w = 1480;
@@ -73,9 +71,8 @@ void	ft_julia(t_fractol f, t_point pc)
 	if (!(img_1->image = mlx_new_image(f.mlx, img_1->img_w, img_1->img_h)))
 		ft_exit("error image creation for julia");
 	img_1->img_addr = mlx_get_data_addr(img_1->image, &bpp, &s_l, &end);
-//	img_1->pc = pc;
-		cal.cre = -0.7;
-		cal.cim = 0.27015;
+	img_1->pc = pc;
+	img_1->ca = cal;
 	get_point_julia(img_1, pc, cal);
 	put_frame(img_1, pc);
 	img_1->f = f;
@@ -87,6 +84,7 @@ void	pick_fract(int check)
 {
 	t_fractol	f;
 	t_point		pc;
+	t_calc	cal;
 
 	f.mlx = mlx_init();
 	pc.y = 0;
@@ -94,7 +92,13 @@ void	pick_fract(int check)
 			check == 9 || check == 14 || check == 15 || check == 18 || check == 27 \
 			|| check == 41 || check == 45 || check == 54 || check == 81)
 	{
-		ft_julia(f, pc);
+	f.win_1 = mlx_new_window(f.mlx, 1500, 1020, "Julia's window");
+		cal.cre = -0.7;
+		cal.cim = 0.27015;
+		cal.zoom = 1;
+		cal.x = 0;
+		cal.y = 0;
+		ft_julia(f, pc, cal);
 	}
 	if (check == 4 || check == 8 || check == 9 || check == 12 || check == 5 || \
 			check == 17 || check == 18 || check == 44 || check == 45 || check == 57 \

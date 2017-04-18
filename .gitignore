@@ -1,4 +1,5 @@
 a.out
+fractol
 libft/*.o
 libft/*.a
 exec.sh

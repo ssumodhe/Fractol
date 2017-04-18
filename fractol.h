@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:53 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/17 17:44:06 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/18 18:27:46 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 # define ITER_MAX_MAN 142
 # define ITER_MAX_JU 200
 # define ITER_MAX_KITZ 25 //unused
+
+
+typedef struct		s_calc
+{
+	double		cre;
+	double		cim;
+	double		zoom;
+	double		x;
+	double		y;
+}					t_calc;
 
 
 typedef	struct		s_fractol
@@ -55,6 +65,7 @@ typedef	struct		s_image
 	char		*img_addr;
 	t_fractol	f;
 	t_point		pc;
+	t_calc		ca;
 }					t_image;
 
 typedef struct		s_circle
@@ -68,13 +79,6 @@ typedef struct		s_circle
 }					t_circle;
 
 
-typedef struct		s_calc
-{
-	double		cre;
-	double		cim;
-}					t_calc;
-
-
 /*
 ** main_fract.c
 */
@@ -84,7 +88,7 @@ int					checkfile(char *str);
 ** pick_fract.c
 */
 void				pick_fract(int check);
-void				ft_julia(t_fractol f, t_point pc);
+void				ft_julia(t_fractol f, t_point pc, t_calc cal);
 void				ft_mandelbrot(t_fractol f, t_point pc);
 void				ft_kitty(t_fractol f, t_point pc);
 
