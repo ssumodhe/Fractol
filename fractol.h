@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:53 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/18 18:27:46 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/20 18:39:09 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <math.h>
 
 # define WIN_NAME "Smile!!"
-# define ITER_MAX_MAN 142
-# define ITER_MAX_JU 200
+# define ITER_MAX_MAN 150 // was 142 in mandel_v4
+# define ITER_MAX_JU 150
 # define ITER_MAX_KITZ 25 //unused
 
 
@@ -27,9 +27,12 @@ typedef struct		s_calc
 {
 	double		cre;
 	double		cim;
-	double		zoom;
-	double		x;
-	double		y;
+//	double		zoom;
+	double		x1;
+	double		y1;
+	double		x2;
+	double		y2;
+//	int			iter;
 }					t_calc;
 
 

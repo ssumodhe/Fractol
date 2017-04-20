@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/15 22:43:12 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/18 18:27:40 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/04/20 16:25:19 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ void	pick_fract(int check)
 	f.win_1 = mlx_new_window(f.mlx, 1500, 1020, "Julia's window");
 		cal.cre = -0.7;
 		cal.cim = 0.27015;
-		cal.zoom = 1;
-		cal.x = 0;
-		cal.y = 0;
+		cal.x1 = -1.7;
+		cal.y1 = -1.2;
+		cal.x2 = 1.7;
+		cal.y2 = 1.2;
 		ft_julia(f, pc, cal);
 	}
 	if (check == 4 || check == 8 || check == 9 || check == 12 || check == 5 || \
