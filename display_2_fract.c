@@ -1,80 +1,94 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display_2_fract.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/09 16:27:00 by ssumodhe          #+#    #+#             */
+/*   Updated: 2017/05/09 16:34:43 by ssumodhe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-void		get_colour(int colour, t_image *img, t_point point, double iter_max)
+t_colours	colours_2(double h,double c, double x)
 {
-	double		c;
-	double		l;
-	double		s;
-	double		x;
-	double		h;
-	double		m;
-	double		radian;
-	int			red;
-	int			blue;
-	int			green;
-	int			i;
+	t_colours	col;
 
-	h = (colour * 360) / iter_max;
-	l = 0.5;
-	s = 1;
-
-	c = (1 - fabs((2*l) - 1)) * s;
-	radian = 60 * M_PI / 180;
-	x = c * (1 - fabs(((h / cos(radian)) / 2) - 1));
-	m = l - (c / 2);
-	if (h >= 0 && h < 60)
-	{
-		red = c;
-		green = x;
-		blue = 0;
-	}
-	if (h >= 60 && h < 120)
-	{
-		red = x;
-		green = c;
-		blue = 0;
-	}
-	if (h >= 120 && h < 180)
-	{
-		red = 0;
-		green = c;
-		blue = x;
-	}
 	if (h >= 180 && h < 240)
 	{
-		red = 0;
-		green = x;
-		blue = c;
+		col.red = 0;
+		col.green = x;
+		col.blue = c;
 	}
 	if (h >= 240 && h < 300)
 	{
-		red = x;
-		green = 0;
-		blue = c;
+		col.red = x;
+		col.green = 0;
+		col.blue = c;
 	}
 	if (h >= 300 && h < 360)
 	{
-		red = c;
-		green = 0;
-		blue = x;
+		col.red = c;
+		col.green = 0;
+		col.blue = x;
 	}
+	return (col);
+}
 
-	red = (red + m) * 255;
-	green = (green + m) * 255;
-	blue = (blue + m) * 255;
+t_colours	colours_1(double h, double c, double x)
+{
+	t_colours	col;
 
+	if (h >= 0 && h < 60)
+	{
+		col.red = c;
+		col.green = x;
+		col.blue = 0;
+	}
+	if (h >= 60 && h < 120)
+	{
+		col.red = x;
+		col.green = c;
+		col.blue = 0;
+	}
+	if (h >= 120 && h < 180)
+	{
+		col.red = 0;
+		col.green = c;
+		col.blue = x;
+	}
+	return (col);
+}
+
+void		get_colour(int colour, t_image *img, t_point point, double iter_max)
+{
+	t_cal_col	c_col;
+	t_colours	col;
+
+	c_col.h = (colour * 360) / iter_max;
+	c_col.l = 0.5;
+	c_col.s = 1;
+	c_col.c = (1 - fabs((2*c_col.l) - 1)) * c_col.s;
+	c_col.radian = 60 * M_PI / 180;
+	c_col.x = c_col.c * (1 - fabs(((c_col.h / cos(c_col.radian)) / 2) - 1));
+	c_col.m = c_col.l - (c_col.c / 2);
+	if (c_col.h >= 0 && c_col.h < 180)
+		col = colours_1(c_col.h, c_col.c, c_col.x);
+	else if (c_col.h >= 180 && c_col.h < 360)
+		col = colours_2(c_col.h, c_col.c, c_col.x);
 	if (point.x >= 0 && point.y >= 0 && point.x < img->img_w)
 	{
-		i = (4 * (point.x + (point.y * img->img_w)));
-		if (i < (4 * img->img_w * img->img_h) - 4)
+		c_col.i = (4 * (point.x + (point.y * img->img_w)));
+		if (c_col.i < (4 * img->img_w * img->img_h) - 4)
 		{
-			img->img_addr[i + 0] = blue;
-			img->img_addr[i + 1] = green;
-			img->img_addr[i + 2] = red;
-			img->img_addr[i + 3] = 0x00;
+			img->img_addr[c_col.i + 0] = (col.blue + c_col.m) * 255;
+			img->img_addr[c_col.i + 1] = (col.green + c_col.m) * 255;
+			img->img_addr[c_col.i + 2] = (col.red + c_col.m) * 255;
+			img->img_addr[c_col.i + 3] = 0x00;
 		}
 	}
-
 }
 
 void	put_frame(t_image *image, t_point point)

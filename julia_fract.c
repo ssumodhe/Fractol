@@ -6,13 +6,14 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 13:00:07 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/20 18:31:12 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/09 18:39:15 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		ft_zoom(int click, int x, int y, t_image *image)
+
+int		ft_zoom(int click, int x, int y, t_image *image) //void??
 {
 	double	x_tmp;
 	double	y_tmp;
@@ -94,7 +95,7 @@ int		ft_julia_key(int keycode, t_image *image)
 		mlx_destroy_image(image->f.mlx, image->image);
 		mlx_hook(image->f.win_1, 4, 0, ft_zoom, image);
 	}
-	if (keycode == 82)
+	if (keycode == 82) // touche 0
 	{
 		mlx_destroy_image(image->f.mlx, image->image);
 		image->ca.cre = -0.7;
@@ -105,26 +106,30 @@ int		ft_julia_key(int keycode, t_image *image)
 		image->ca.y2 = 1.2;
 		ft_julia(image->f ,image->pc, image->ca);
 	}
-	if (keycode == 123)
+	if (keycode == 123) // fleche gauche
 	{
+		mlx_destroy_image(image->f.mlx, image->image);
 		image->ca.x1 = image->ca.x1 + 0.01;
 		image->ca.x2 = image->ca.x2 + 0.01;
 		ft_julia(image->f ,image->pc, image->ca);
 	}
-	if (keycode == 124)
+	if (keycode == 124) // fleche droite
 	{
+		mlx_destroy_image(image->f.mlx, image->image);
 		image->ca.x1 = image->ca.x1 - 0.01;
 		image->ca.x2 = image->ca.x2 - 0.01;
 		ft_julia(image->f ,image->pc, image->ca);
 	}
-	if (keycode == 126)
+	if (keycode == 126) // fleche haut
 	{
+		mlx_destroy_image(image->f.mlx, image->image);
 		image->ca.y1 = image->ca.y1 + 0.01;
 		image->ca.y2 = image->ca.y2 + 0.01;
 		ft_julia(image->f ,image->pc, image->ca);
 	}
-	if (keycode == 125)
+	if (keycode == 125) // fleche bas
 	{
+		mlx_destroy_image(image->f.mlx, image->image);
 		image->ca.y1 = image->ca.y1 - 0.01;
 		image->ca.y2 = image->ca.y2 - 0.01;
 		ft_julia(image->f ,image->pc, image->ca);
@@ -150,7 +155,7 @@ void	get_point_julia(t_image *image, t_point point, t_calc ca)
 	double 	tmp;
 	int		i;
 
-	(void)ca;
+//	(void)ca;
 
 	zoom_x = image->img_w / (ca.x2 - ca.x1);
 	zoom_y = image->img_h / (ca.y2 - ca.y1);
@@ -179,19 +184,3 @@ void	get_point_julia(t_image *image, t_point point, t_calc ca)
 		point.x++;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

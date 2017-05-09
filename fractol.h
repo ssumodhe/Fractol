@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:53 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/20 18:39:09 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/09 17:24:34 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,27 @@
 
 # define WIN_NAME "Smile!!"
 # define ITER_MAX_MAN 150 // was 142 in mandel_v4
-# define ITER_MAX_JU 150
+# define ITER_MAX_JU 125
 # define ITER_MAX_KITZ 25 //unused
 
+typedef struct		s_cal_col
+{
+	double		c;
+	double		l;
+	double		s;
+	double		x;
+	double		h;
+	double		m;
+	double		radian;
+	int			i;
+}					t_cal_col;
+
+typedef struct		s_colours
+{
+	int		red;
+	int		green;
+	int		blue;
+}					t_colours;
 
 typedef struct		s_calc
 {
@@ -95,7 +113,6 @@ void				ft_julia(t_fractol f, t_point pc, t_calc cal);
 void				ft_mandelbrot(t_fractol f, t_point pc);
 void				ft_kitty(t_fractol f, t_point pc);
 
-
 /*
 ** display_fract.c
 */
@@ -107,13 +124,14 @@ void				ft_pixel_put_img(t_image *img, int x, int y,int colour);
 /*
 ** display_2_fract.c
 */
+t_colours			colours_2(double h, double c, double x);
+t_colours			colours_1(double h, double c, double x);
 void				get_colour(int colour, t_image *img, t_point point, double iter_max);
 void				put_frame(t_image *image, t_point point);
 
 /*
 ** mandelbrot_fract.c
 */
-
 void				get_point_mandelbrot(t_image *image, t_point point);
 int					ft_mandelbrot_key(int keycode, t_image *image);
 

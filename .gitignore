@@ -1,5 +1,6 @@
 a.out
 fractol
+*.o
 libft/*.o
 libft/*.a
 exec.sh
