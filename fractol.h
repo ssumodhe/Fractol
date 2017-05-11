@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:53 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/09 17:24:34 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/11 20:23:19 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define WIN_NAME "Smile!!"
 # define ITER_MAX_MAN 150 // was 142 in mandel_v4
-# define ITER_MAX_JU 125
+# define ITER_MAX_JU 100
 # define ITER_MAX_KITZ 25 //unused
 
 typedef struct		s_cal_col
@@ -45,12 +45,12 @@ typedef struct		s_calc
 {
 	double		cre;
 	double		cim;
-//	double		zoom;
+	double		zoom_x;
+	double		zoom_y;
 	double		x1;
 	double		y1;
 	double		x2;
 	double		y2;
-//	int			iter;
 }					t_calc;
 
 
@@ -109,9 +109,9 @@ int					checkfile(char *str);
 ** pick_fract.c
 */
 void				pick_fract(int check);
-void				ft_julia(t_fractol f, t_point pc, t_calc cal);
-void				ft_mandelbrot(t_fractol f, t_point pc);
-void				ft_kitty(t_fractol f, t_point pc);
+void				zoom_init(t_image *image, int x, int y, double zoom);
+void				ft_directionkey(int keycode,t_image *image);
+void				ft_kitty(t_fractol f, t_point pc); //a init
 
 /*
 ** display_fract.c
@@ -132,14 +132,31 @@ void				put_frame(t_image *image, t_point point);
 /*
 ** mandelbrot_fract.c
 */
-void				get_point_mandelbrot(t_image *image, t_point point);
+void				get_point_mandelbrot(t_image *image, t_point point, t_calc ca);
+int					ft_draw_man(t_point point, t_calc ca);
 int					ft_mandelbrot_key(int keycode, t_image *image);
+int					ft_zoom_man(int click, int x, int y, t_image *image);
+
+/*
+** init_mandelbrot_fract.c
+*/
+void				init_mandelbrot(t_fractol f, t_point pc);
+void				ft_mandelbrot(t_fractol f, t_point pc, t_calc cal);
 
 /*
 ** julia_fract.c
 */
 void				get_point_julia(t_image *image, t_point point, t_calc ca);
+int					ft_draw_ju(t_point point,t_calc ca);
 int					ft_julia_key(int keycode, t_image *image);
+int					ft_hook(int x, int y, t_image *image);
+int					ft_zoom_ju(int click, int x, int y, t_image *image);
+
+/*
+** init_julia_fract.c
+*/
+void				init_julia(t_fractol f, t_point pc);
+void				ft_julia(t_fractol f, t_point pc, t_calc cal);
 
 /*
 ** kitty_fract.c

@@ -6,56 +6,90 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:32:50 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/09 16:52:57 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/11 20:21:56 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		ft_mandelbrot_key(int keycode, t_image *image)
+int		ft_zoom_man(int click, int x, int y, t_image *image) //void??
 {
-	(void)image;
-	if (keycode == 53)
-		exit(0);
+	printf(GREEN"man - click = %d\tx = %d\ty = %d\n"RESET, click, x, y); //
+	if (click == 5) //out
+	{
+		zoom_init(image, x, y, 0.4);
+		ft_mandelbrot(image->f ,image->pc, image->ca);
+	}
+	
+	if (click == 4) //in
+	{
+		zoom_init(image, x, y, 0.6);
+		ft_mandelbrot(image->f ,image->pc, image->ca);
+	}
 	return (0);
 }
 
-void	get_point_mandelbrot(t_image *image, t_point point)
+int		ft_mandelbrot_key(int keycode, t_image *image)
 {
-	double	x = -0.75;
-	double	y = 0;
-	double	zre;
-	double	zim;
-	double	pre;
-	double	pim;
-	double	tmp;
-	double	zoom_x = 0.8;
-	double	zoom_y = 0.8;
-	int		i;
-	
-	point.y = 0;
-	while (point.y < image->img_h)
+	if (keycode == 53)
+		exit(0);
+	else if (keycode == 82) // touche 0
 	{
-		pim = (point.y - image->img_h / 2) / (0.5 * zoom_y * image->img_h) + y;
-		point.x = 0;
-		while (point.x < image->img_w)
+		mlx_destroy_image(image->f.mlx, image->image);
+		image->ca.x1 = -2.1;
+		image->ca.y1 = -1.2;
+		image->ca.x2 = 0.6;
+		image->ca.y2 = 1.2;
+		ft_mandelbrot(image->f ,image->pc, image->ca);
+	}
+	else if (keycode >= 123 && keycode <= 126)
+	{
+		mlx_destroy_image(image->f.mlx, image->image);
+		ft_directionkey(keycode, image);
+		ft_mandelbrot(image->f ,image->pc, image->ca);
+	}
+	return (0);
+}
+
+int		ft_draw_man(t_point point, t_calc ca)
+{
+	double 	z_r;
+	double 	z_i;
+	double 	tmp;
+	int		i;
+
+	z_r = 0;
+	z_i = 0;
+	ca.cre = point.x / ca.zoom_x + ca.x1;
+	ca.cim = point.y / ca.zoom_y + ca.y1;
+	i = 0;
+	while (z_r *z_r + z_i *z_i < 4 && i <  ITER_MAX_MAN)
+	{
+		tmp = z_r;
+		z_r = z_r * z_r - z_i * z_i + ca.cre;
+		z_i = 2 * z_i * tmp + ca.cim;
+		i++;
+	}
+	return (i);
+}
+
+void	get_point_mandelbrot(t_image *image, t_point point, t_calc ca)
+{
+	int		i;
+
+	ca.zoom_x = image->img_w / (ca.x2 - ca.x1);
+	ca.zoom_y = image->img_h / (ca.y2 - ca.y1);
+	point.x = 0;
+	while (point.x < image->img_w)
+	{
+		point.y = 0;
+		while (point.y < image->img_h)
 		{
-			pre = 1.5 * (point.x - image->img_w / 2) / (0.5 * zoom_x * image->img_w) + x;
-			i = 0;
-			zim = 0;
-			zre = 0;
-			tmp = 0;
-			while ((zre * zre + zim * zim) < 4 && i < ITER_MAX_MAN)
-			{
-				tmp = zre;
-				zre = zre * zre - zim * zim + pre;
-				zim = 2 * tmp * zim + pim;
-				i++;
-			}
-			point.x++;
-			if ((zre * zre + zim * zim) >= 4)
+			i = ft_draw_man(point, ca);
+			if (i != ITER_MAX_MAN)
 				get_colour(i, image, point, ITER_MAX_MAN);
+			point.y++;
 		}
-		point.y++;
+		point.x++;
 	}
 }
