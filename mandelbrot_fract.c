@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 16:32:50 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/11 20:21:56 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/12 18:36:54 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		ft_zoom_man(int click, int x, int y, t_image *image) //void??
 {
-	printf(GREEN"man - click = %d\tx = %d\ty = %d\n"RESET, click, x, y); //
 	if (click == 5) //out
 	{
 		zoom_init(image, x, y, 0.4);
