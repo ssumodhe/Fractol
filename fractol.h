@@ -6,9 +6,15 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:53 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/11 20:23:19 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/12 18:11:42 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+/*
+ *  Attention ft_julia renvoie un t_image *!! verifier ce quelle revoie des qu'on l'utilise
+ */
+
 
 #ifndef FRACTOL_H
 #define FRACTOL_H
@@ -84,6 +90,7 @@ typedef	struct		s_image
 	float		img_w;
 	float		img_h;
 	char		*img_addr;
+	int			status_mouse;
 	t_fractol	f;
 	t_point		pc;
 	t_calc		ca;
@@ -156,7 +163,8 @@ int					ft_zoom_ju(int click, int x, int y, t_image *image);
 ** init_julia_fract.c
 */
 void				init_julia(t_fractol f, t_point pc);
-void				ft_julia(t_fractol f, t_point pc, t_calc cal);
+t_image				*ft_julia(t_fractol f, t_point pc, t_calc cal);
+void				ft_destroy_create_julia(t_image *image);
 
 /*
 ** kitty_fract.c
