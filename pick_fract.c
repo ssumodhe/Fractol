@@ -6,51 +6,30 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/15 22:43:12 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/12 18:11:38 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/13 23:56:43 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_kitty(t_fractol f, t_point pc)
+void	ft_directionkey(int keycode, t_image *image)
 {
-	t_image	*img_3;
-	int		end = 1;
-	int		s_l = 4;
-	int		bpp = 32;
-
-	f.win_3 = mlx_new_window(f.mlx, 1800, 500, "Kitty's window");
-	if (!(img_3 = (t_image *)malloc(sizeof(*img_3))))
-		ft_exit("error malloc for kitty");
-	img_3->img_w = 1780;
-	img_3->img_h = 480;
-	if (!(img_3->image = mlx_new_image(f.mlx, img_3->img_w, img_3->img_h)))
-		ft_exit("error image creation for kitty");
-	img_3->img_addr = mlx_get_data_addr(img_3->image, &bpp, &s_l, &end);
-	put_frame(img_3, pc);
-	get_point_kitty(img_3, pc);
-	mlx_key_hook(f.win_3, ft_kitty_key, img_3);
-	mlx_put_image_to_window(f.mlx, f.win_3, img_3->image, 10, 10);
-}
-
-void	ft_directionkey(int keycode,t_image *image)
-{
-   	if (keycode == 123) // fleche gauche
+	if (keycode == 123)
 	{
 		image->ca.x1 = image->ca.x1 + 0.01;
 		image->ca.x2 = image->ca.x2 + 0.01;
 	}
-	else if (keycode == 124) // fleche droite
+	else if (keycode == 124)
 	{
 		image->ca.x1 = image->ca.x1 - 0.01;
 		image->ca.x2 = image->ca.x2 - 0.01;
 	}
-	else if (keycode == 126) // fleche haut
+	else if (keycode == 126)
 	{
 		image->ca.y1 = image->ca.y1 + 0.01;
 		image->ca.y2 = image->ca.y2 + 0.01;
 	}
-	else if (keycode == 125) // fleche bas
+	else if (keycode == 125)
 	{
 		image->ca.y1 = image->ca.y1 - 0.01;
 		image->ca.y2 = image->ca.y2 - 0.01;
@@ -84,20 +63,19 @@ void	pick_fract(int check)
 
 	f.mlx = mlx_init();
 	pc.y = 0;
-	if (check == 1 || check == 2 || check == 3 ||  check == 5 || check == 6 || \
-			check == 9 || check == 14 || check == 15 || check == 18 || check == 27 \
-			|| check == 41 || check == 45 || check == 54 || check == 81)
+	if (check == 1 || check == 2 || check == 3 || check == 5 || check == 6 || \
+		check == 9 || check == 14 || check == 15 || check == 18 || check == 27 \
+		|| check == 41 || check == 45 || check == 54 || check == 81)
 		init_julia(f, pc);
 	if (check == 4 || check == 8 || check == 9 || check == 12 || check == 5 || \
-			check == 17 || check == 18 || check == 44 || check == 45 || check == 57 \
-			|| check == 84 || check == 21 || check == 30 || check == 6)
+		check == 17 || check == 18 || check == 44 || check == 45 || \
+		check == 57 || check == 84 || check == 21 || check == 30 || \
+		check == 6)
 		init_mandelbrot(f, pc);
-	
-	if (check == 13 || check == 26 || check == 39 || check == 14 || check == 15\
-			|| check == 17 || check == 18  || check == 27 || check == 53 || \
-			check == 54	|| check == 57 || check == 93 || check == 21 || check == 30)
-	{
-		ft_kitty(f, pc);
-	}
+	if (check == 13 || check == 26 || check == 39 || check == 14 || \
+		check == 15 || check == 17 || check == 18 || check == 27 || \
+		check == 53 || check == 54 || check == 57 || check == 93 || \
+		check == 21 || check == 30)
+		init_douady(f, pc);
 	mlx_loop(f.mlx);
 }

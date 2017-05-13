@@ -6,20 +6,20 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 13:00:07 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/12 18:11:26 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/14 00:05:02 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		ft_zoom_ju(int click, int x, int y, t_image *image) //void??
+int		ft_zoom_ju(int click, int x, int y, t_image *image)
 {
-	if (click == 5) //out
+	if (click == 5)
 	{
 		zoom_init(image, x, y, 0.4);
 		ft_destroy_create_julia(image);
 	}
-	if (click == 4) //in
+	if (click == 4)
 	{
 		zoom_init(image, x, y, 0.6);
 		ft_destroy_create_julia(image);
@@ -33,20 +33,22 @@ int		ft_hook(int x, int y, t_image *image)
 	{
 		if (x < 0 || x >= image->img_w || y < 0 || y >= image->img_h)
 			return (0);
-		image->ca.cre = (x * (image->ca.x2 - image->ca.x1) / image->img_w) + image->ca.x1;
-		image->ca.cim = (y * (image->ca.y2 - image->ca.y1) / image->img_h) + image->ca.y1;
+		image->ca.cre = (x * (image->ca.x2 - image->ca.x1) / image->img_w) \
+						+ image->ca.x1;
+		image->ca.cim = (y * (image->ca.y2 - image->ca.y1) / image->img_h) \
+						+ image->ca.y1;
 		ft_destroy_create_julia(image);
 	}
-	return(0);
+	return (0);
 }
 
 int		ft_julia_key(int keycode, t_image *image)
 {
-	if (keycode == 53) // touche esc
+	if (keycode == 53)
 		exit(0);
-	if (keycode == 36) // touche enter
+	if (keycode == 36)
 		image->status_mouse = (image->status_mouse == 0) ? 1 : 0;
-	else if (keycode == 82) // touche 0
+	else if (keycode == 82)
 	{
 		image->ca.cre = -0.7;
 		image->ca.cim = 0.27015;
@@ -66,15 +68,15 @@ int		ft_julia_key(int keycode, t_image *image)
 
 int		ft_draw_ju(t_point point, t_calc ca)
 {
-	double 	z_r;
-	double 	z_i;
-	double 	tmp;
-	int		i;
+	double		z_r;
+	double		z_i;
+	double		tmp;
+	int			i;
 
 	z_r = point.x / ca.zoom_x + ca.x1;
 	z_i = point.y / ca.zoom_y + ca.y1;
 	i = 0;
-	while (z_r *z_r + z_i *z_i < 4 && i <  ITER_MAX_JU)
+	while (z_r * z_r + z_i * z_i < 4 && i < ITER_MAX_JU)
 	{
 		tmp = z_r;
 		z_r = z_r * z_r - z_i * z_i + ca.cre;

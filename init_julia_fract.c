@@ -6,21 +6,25 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 19:39:55 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/12 18:10:39 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/14 00:10:34 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_destroy_create_julia(t_image *image)
+void		ft_destroy_create_julia(t_image *image)
 {
-	int		end = 1;
-	int		s_l = 4;
-	int		bpp = 32;
+	int		end;
+	int		s_l;
+	int		bpp;
 
 	mlx_destroy_image(image->f.mlx, image->image);
-	if (!(image->image = mlx_new_image(image->f.mlx, image->img_w, image->img_h)))
+	if (!(image->image = mlx_new_image(image->f.mlx, image->img_w, \
+					image->img_h)))
 		ft_exit("error image creation for julia");
+	end = 1;
+	s_l = 4;
+	bpp = 32;
 	image->img_addr = mlx_get_data_addr(image->image, &bpp, &s_l, &end);
 	get_point_julia(image, image->pc, image->ca);
 	put_frame(image, image->pc);
@@ -30,9 +34,9 @@ void	ft_destroy_create_julia(t_image *image)
 t_image		*ft_julia(t_fractol f, t_point pc, t_calc cal)
 {
 	t_image	*img_1;
-	int		end = 1;
-	int		s_l = 4;
-	int		bpp = 32;
+	int		end;
+	int		s_l;
+	int		bpp;
 
 	if (!(img_1 = (t_image *)malloc(sizeof(*img_1))))
 		ft_exit("error malloc for julia");
@@ -41,6 +45,9 @@ t_image		*ft_julia(t_fractol f, t_point pc, t_calc cal)
 	img_1->status_mouse = 0;
 	if (!(img_1->image = mlx_new_image(f.mlx, img_1->img_w, img_1->img_h)))
 		ft_exit("error image creation for julia");
+	end = 1;
+	s_l = 4;
+	bpp = 32;
 	img_1->img_addr = mlx_get_data_addr(img_1->image, &bpp, &s_l, &end);
 	img_1->pc = pc;
 	img_1->ca = cal;

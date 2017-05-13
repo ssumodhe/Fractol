@@ -6,7 +6,7 @@
 #    By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/30 20:36:48 by ssumodhe          #+#    #+#              #
-#    Updated: 2017/05/11 20:15:24 by ssumodhe         ###   ########.fr        #
+#    Updated: 2017/05/14 00:16:47 by ssumodhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCS = main_fract.c \
 	   pick_fract.c \
 	   julia_fract.c \
 	   init_julia_fract.c \
-	   kitty_fract.c \
+	   douady_fract.c \
+	   init_douady_fract.c \
 	   mandelbrot_fract.c \
 	   init_mandelbrot_fract.c \
 	   display_fract.c \

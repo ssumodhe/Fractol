@@ -6,18 +6,18 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 20:12:23 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/11 20:22:29 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/14 00:08:23 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_mandelbrot(t_fractol f, t_point pc, t_calc cal)
+void		ft_mandelbrot(t_fractol f, t_point pc, t_calc cal)
 {
 	t_image	*img_2;
-	int		end = 1;
-	int		s_l = 4;
-	int		bpp = 32;
+	int		end;
+	int		s_l;
+	int		bpp;
 
 	if (!(img_2 = (t_image *)malloc(sizeof(*img_2))))
 		ft_exit("error malloc for mandelbrot");
@@ -25,6 +25,9 @@ void	ft_mandelbrot(t_fractol f, t_point pc, t_calc cal)
 	img_2->img_h = 980;
 	if (!(img_2->image = mlx_new_image(f.mlx, img_2->img_w, img_2->img_h)))
 		ft_exit("error image creation for mandelbrot");
+	end = 1;
+	s_l = 4;
+	bpp = 32;
 	img_2->img_addr = mlx_get_data_addr(img_2->image, &bpp, &s_l, &end);
 	img_2->pc = pc;
 	img_2->ca = cal;

@@ -6,13 +6,13 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/09 16:27:00 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/10 17:19:13 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/14 00:06:25 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_colours	colours_2(double h,double c, double x)
+t_colours	colours_2(double h, double c, double x)
 {
 	t_colours	col;
 
@@ -70,7 +70,7 @@ void		get_colour(int colour, t_image *img, t_point point, double iter_max)
 	c_col.h = (colour * 360) / iter_max;
 	c_col.l = 0.5;
 	c_col.s = 1;
-	c_col.c = (1 - fabs((2*c_col.l) - 1)) * c_col.s;
+	c_col.c = (1 - fabs((2 * c_col.l) - 1)) * c_col.s;
 	c_col.radian = 60 * M_PI / 180;
 	c_col.x = c_col.c * (1 - fabs(((c_col.h / cos(c_col.radian)) / 2) - 1));
 	c_col.m = c_col.l - (c_col.c / 2);
@@ -91,7 +91,7 @@ void		get_colour(int colour, t_image *img, t_point point, double iter_max)
 	}
 }
 
-void	put_frame(t_image *image, t_point point)
+void		put_frame(t_image *image, t_point point)
 {
 	point.colour = 0x00FFFFFF;
 	point.x1 = 0;

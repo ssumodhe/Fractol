@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:16 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/10 17:19:02 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/13 22:40:50 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		checkfile(char *str)
 		num = 1;
 	else if (ft_strcmp("mandelbrot", str) == 0)
 		num = 4;
-	else if (ft_strcmp("kitty", str) == 0)
+	else if (ft_strcmp("douady", str) == 0)
 		num = 13;
 	else
 		num = 40;
@@ -35,7 +35,7 @@ int		main(int argc, char **argv)
 	int		check;
 
 	if (argc != 4 && argc != 3 && argc != 2)
-		ft_exit("usage: ./fractol [mandelbrot | julia | kitty]");
+		ft_exit("usage: ./fractol [mandelbrot | julia | douady]");
 	i = 1;
 	cpt = 0;
 	while (i < argc)
@@ -50,7 +50,7 @@ int		main(int argc, char **argv)
 		i++;
 	}
 	if (cpt >= 1)
-		ft_putendl("usage: ./fractol [mandelbrot | julia | kitty]");
+		ft_putendl("usage: ./fractol [mandelbrot | julia | douady]");
 	if (check <= 93 && check != 40 && check != 80)
 		pick_fract(check);
 	return (0);

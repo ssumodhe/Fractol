@@ -6,12 +6,12 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 14:52:32 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/04/13 17:57:49 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/05/14 00:12:29 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-	
+
 void		ft_pixel_put_img(t_image *img, int x, int y, int colour)
 {
 	int		i;
@@ -87,4 +87,3 @@ void		ft_drawline_img(t_image *image, t_point pc)
 	else
 		ft_choose_side_y(pc, image);
 }
-
