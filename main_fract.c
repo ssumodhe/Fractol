@@ -6,7 +6,7 @@
 /*   By: ssumodhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:47:16 by ssumodhe          #+#    #+#             */
-/*   Updated: 2017/05/13 22:40:50 by ssumodhe         ###   ########.fr       */
+/*   Updated: 2017/06/01 19:52:01 by ssumodhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		main(int argc, char **argv)
 		i++;
 	}
 	if (cpt >= 1)
-		ft_putendl("usage: ./fractol [mandelbrot | julia | douady]");
+		ft_exit("usage: ./fractol [mandelbrot | julia | douady]");
 	if (check <= 93 && check != 40 && check != 80)
 		pick_fract(check);
 	return (0);
